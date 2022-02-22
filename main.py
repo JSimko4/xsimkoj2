@@ -1,21 +1,32 @@
 import socketserver
 import socket
-import sys
 import time
 import logging
 import sipfullproxy
 
 
-def main():
-    logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='proxy.log',level=logging.INFO,datefmt='%H:%M:%S')
-    logging.info(time.strftime("%a, %d %b %Y %H:%M:%S ", time.localtime()))
-    hostname = socket.gethostname()
-    logging.info(hostname)
+# ok_200 = "200 OK"
+# not_acceptable_here_488 = "488 Not Acceptable Here"
+# bad_request_400 = "400 Bad Request"
+# unvailable_480 = "480 Temporarily Unavailable"
+# server_internal_500 = "500 Server Internal Error"
+# not_acceptable_406 = "406 Not Acceptable"
 
+ok_200 = "200 OK VYBAVENE"
+not_acceptable_here_488 = "488 Neni to tu akceptovane"
+bad_request_400 = "400 Zly rikvest"
+unvailable_480 = "480 Docasne nedostupne"
+server_internal_500 = "500 Vnutorny problem servera"
+not_acceptable_406 = "406 Neprijatelne"
+
+
+def main():
+    logging.basicConfig(format='%(asctime)s: %(message)s', filename='dennik.txt', level=logging.INFO, datefmt='%H:%M:%S')
+    logging.info(time.strftime("%a, %d %b %Y %H:%M:%S ", time.localtime()))
+
+    hostname = socket.gethostname()
     ipaddress = socket.gethostbyname(hostname)
-    if ipaddress == "127.0.0.1":
-        ipaddress = sys.argv[1]
-    logging.info(ipaddress)
+
     sipfullproxy.recordroute = "Record-Route: <sip:%s:%d;lr>" % (ipaddress, sipfullproxy.PORT)
     sipfullproxy.topvia = "Via: SIP/2.0/UDP %s:%d" % (ipaddress, sipfullproxy.PORT)
     server = socketserver.UDPServer((sipfullproxy.HOST, sipfullproxy.PORT), sipfullproxy.UDPHandler)

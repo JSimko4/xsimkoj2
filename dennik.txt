@@ -1,0 +1,51 @@
+19:40:18: Tue, 22 Feb 2022 19:40:18 
+19:40:24: >>> INVITE sip:pocitac@147.175.191.134 SIP/2.0
+19:40:24: <<< SIP/2.0 400 Zly rikvest
+19:40:24: mobil@147.175.191.134 vola pocitac@147.175.191.134
+19:40:24: >>> ACK sip:pocitac@147.175.191.134 SIP/2.0
+19:40:24: destination pocitac@147.175.191.134
+19:40:28: >>> REGISTER sip:147.175.191.134 SIP/2.0
+19:40:28: From: mobil@147.175.191.134 - Contact: 147.175.190.161:48248
+19:40:28: <<< SIP/2.0 200 OK VYBAVENE
+19:40:33: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+19:40:33: From: pocitac@147.175.191.134 - Contact: 147.175.191.134:62242
+19:40:33: <<< SIP/2.0 200 OK VYBAVENE
+19:40:34: >>> PUBLISH sip:pocitac@147.175.191.134:5060 SIP/2.0
+19:40:34: <<< SIP/2.0 200 OK VYBAVENE
+19:40:34: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+19:40:34: From: pocitac@147.175.191.134 - Contact: 147.175.191.134:62242
+19:40:34: <<< SIP/2.0 200 OK VYBAVENE
+19:40:36: >>> INVITE sip:pocitac@147.175.191.134 SIP/2.0
+19:40:36: destination pocitac@147.175.191.134
+19:40:36: <<< INVITE sip:pocitac@147.175.191.134 SIP/2.0
+19:40:36: mobil@147.175.191.134 vola pocitac@147.175.191.134
+19:40:36: >>> SIP/2.0 100 Trying
+19:40:36: <<< SIP/2.0 100 Trying
+19:40:36: process code
+19:40:36: >>> SIP/2.0 180 Ringing
+19:40:36: <<< SIP/2.0 180 Ringing
+19:40:36: process code
+19:40:39: >>> SIP/2.0 200 Ok
+19:40:39: <<< SIP/2.0 200 Ok
+19:40:39: process code
+19:40:39: Hovor medzi mobil@147.175.191.134 a pocitac@147.175.191.134 bol prijaty
+19:40:40: >>> SIP/2.0 200 Ok
+19:40:40: <<< SIP/2.0 200 Ok
+19:40:40: process code
+19:40:41: >>> SIP/2.0 200 Ok
+19:40:41: <<< SIP/2.0 200 Ok
+19:40:41: process code
+19:40:43: >>> SIP/2.0 200 Ok
+19:40:43: <<< SIP/2.0 200 Ok
+19:40:43: process code
+19:40:47: >>> SIP/2.0 200 Ok
+19:40:47: <<< SIP/2.0 200 Ok
+19:40:47: process code
+19:40:47: >>> BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+19:40:47: destination mobil@147.175.191.134
+19:40:47: <<< BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+19:40:47: non invitte
+19:40:47: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol ukonceny
+19:40:47: >>> SIP/2.0 200 Ok
+19:40:47: <<< SIP/2.0 200 Ok
+19:40:47: process code

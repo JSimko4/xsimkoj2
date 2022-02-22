@@ -1,4 +1,3 @@
-
 #    Copyright 2014 Philippe THIRION
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,10 +17,13 @@ import socketserver
 import re
 import string
 import socket
-#import threading
+# import threading
 import sys
 import time
 import logging
+
+from main import ok_200, not_acceptable_here_488, bad_request_400, unvailable_480, server_internal_500, \
+    not_acceptable_406
 
 HOST, PORT = '0.0.0.0', 5060
 rx_register = re.compile("^REGISTER")
@@ -47,13 +49,13 @@ rx_contact = re.compile("^Contact:")
 rx_ccontact = re.compile("^m:")
 rx_uri = re.compile("sip:([^@]*)@([^;>$]*)")
 rx_addr = re.compile("sip:([^ ;>$]*)")
-#rx_addrport = re.compile("([^:]*):(.*)")
+# rx_addrport = re.compile("([^:]*):(.*)")
 rx_code = re.compile("^SIP/2.0 ([^ ]*)")
 rx_invalid = re.compile("^192\.168")
 rx_invalid2 = re.compile("^10\.")
-#rx_cseq = re.compile("^CSeq:")
-#rx_callid = re.compile("Call-ID: (.*)$")
-#rx_rr = re.compile("^Record-Route:")
+# rx_cseq = re.compile("^CSeq:")
+# rx_callid = re.compile("Call-ID: (.*)$")
+# rx_rr = re.compile("^Record-Route:")
 rx_request_uri = re.compile("^([^ ]*) sip:([^ ]*) SIP/2.0")
 rx_route = re.compile("^Route:")
 rx_contentlength = re.compile("^Content-Length:")
@@ -70,17 +72,18 @@ recordroute = ""
 topvia = ""
 registrar = {}
 
+last_ringing = False
 
-def hexdump( chars, sep, width ):
+def hexdump(chars, sep, width):
     while chars:
         line = chars[:width]
         chars = chars[width:]
-        line = line.ljust( width, '\000' )
-        logging.debug("%s%s%s" % ( sep.join("%02x" % ord(c) for c in line),sep, quotechars( line )))
+        line = line.ljust(width, '\000')
+        logging.debug("%s%s%s" % (sep.join("%02x" % ord(c) for c in line), sep, quotechars(line)))
 
 
-def quotechars( chars ):
-    return ''.join( ['.', c][c.isalnum()] for c in chars )
+def quotechars(chars):
+    return ''.join(['.', c][c.isalnum()] for c in chars)
 
 
 def showtime():
@@ -93,9 +96,9 @@ class UDPHandler(socketserver.BaseRequestHandler):
         logging.debug("*** REGISTRAR ***")
         logging.debug("*****************")
         for key in registrar.keys():
-            logging.debug("%s -> %s" % (key,registrar[key][0]))
+            logging.debug("%s -> %s" % (key, registrar[key][0]))
         logging.debug("*****************")
-    
+
     def changeRequestUri(self):
         # change request uri
         md = rx_request_uri.search(self.data[0])
@@ -104,8 +107,8 @@ class UDPHandler(socketserver.BaseRequestHandler):
             uri = md.group(2)
             if uri in registrar:
                 uri = "sip:%s" % registrar[uri][0]
-                self.data[0] = "%s %s SIP/2.0" % (method,uri)
-        
+                self.data[0] = "%s %s SIP/2.0" % (method, uri)
+
     def removeRouteHeader(self):
         # delete Route
         data = []
@@ -113,29 +116,29 @@ class UDPHandler(socketserver.BaseRequestHandler):
             if not rx_route.search(line):
                 data.append(line)
         return data
-    
+
     def addTopVia(self):
-        branch= ""
+        branch = ""
         data = []
         for line in self.data:
             if rx_via.search(line) or rx_cvia.search(line):
                 md = rx_branch.search(line)
                 if md:
-                    branch=md.group(1)
+                    branch = md.group(1)
                     via = "%s;branch=%sm" % (topvia, branch)
                     data.append(via)
                 # rport processing
                 if rx_rport.search(line):
                     text = "received=%s;rport=%d" % self.client_address
-                    via = line.replace("rport",text)   
+                    via = line.replace("rport", text)
                 else:
                     text = "received=%s" % self.client_address[0]
-                    via = "%s;%s" % (line,text)
+                    via = "%s;%s" % (line, text)
                 data.append(via)
             else:
                 data.append(line)
         return data
-                
+
     def removeTopVia(self):
         data = []
         for line in self.data:
@@ -145,8 +148,8 @@ class UDPHandler(socketserver.BaseRequestHandler):
             else:
                 data.append(line)
         return data
-        
-    def checkValidity(self,uri):
+
+    def checkValidity(self, uri):
         addrport, socket, client_addr, validity = registrar[uri]
         now = int(time.time())
         if validity > now:
@@ -155,64 +158,64 @@ class UDPHandler(socketserver.BaseRequestHandler):
             del registrar[uri]
             logging.warning("registration for %s has expired" % uri)
             return False
-    
-    def getSocketInfo(self,uri):
+
+    def getSocketInfo(self, uri):
         addrport, socket, client_addr, validity = registrar[uri]
-        return (socket,client_addr)
-        
+        return (socket, client_addr)
+
     def getDestination(self):
         destination = ""
         for line in self.data:
             if rx_to.search(line) or rx_cto.search(line):
                 md = rx_uri.search(line)
                 if md:
-                    destination = "%s@%s" %(md.group(1),md.group(2))
+                    destination = "%s@%s" % (md.group(1), md.group(2))
                 break
         return destination
-                
+
     def getOrigin(self):
         origin = ""
         for line in self.data:
             if rx_from.search(line) or rx_cfrom.search(line):
                 md = rx_uri.search(line)
                 if md:
-                    origin = "%s@%s" %(md.group(1),md.group(2))
+                    origin = "%s@%s" % (md.group(1), md.group(2))
                 break
         return origin
-        
-    def sendResponse(self,code):
+
+    def sendResponse(self, code):
         request_uri = "SIP/2.0 " + code
-        self.data[0]= request_uri
+        self.data[0] = request_uri
         index = 0
         data = []
         for line in self.data:
             data.append(line)
             if rx_to.search(line) or rx_cto.search(line):
                 if not rx_tag.search(line):
-                    data[index] = "%s%s" % (line,";tag=123456")
+                    data[index] = "%s%s" % (line, ";tag=123456")
             if rx_via.search(line) or rx_cvia.search(line):
                 # rport processing
                 if rx_rport.search(line):
                     text = "received=%s;rport=%d" % self.client_address
-                    data[index] = line.replace("rport",text) 
+                    data[index] = line.replace("rport", text)
                 else:
                     text = "received=%s" % self.client_address[0]
-                    data[index] = "%s;%s" % (line,text)      
+                    data[index] = "%s;%s" % (line, text)
             if rx_contentlength.search(line):
-                data[index]="Content-Length: 0"
+                data[index] = "Content-Length: 0"
             if rx_ccontentlength.search(line):
-                data[index]="l: 0"
+                data[index] = "l: 0"
             index += 1
             if line == "":
                 break
         data.append("")
         text = "\r\n".join(data)
         text = text.encode("utf-8")
-        self.socket.sendto(text,self.client_address)
+        self.socket.sendto(text, self.client_address)
         showtime()
         logging.info("<<< %s" % data[0])
-        logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text),text))
-        
+        logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
+
     def processRegister(self):
         fromm = ""
         contact = ""
@@ -229,7 +232,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
             if rx_to.search(line) or rx_cto.search(line):
                 md = rx_uri.search(line)
                 if md:
-                    fromm = "%s@%s" % (md.group(1),md.group(2))
+                    fromm = "%s@%s" % (md.group(1), md.group(2))
             if rx_contact.search(line) or rx_ccontact.search(line):
                 md = rx_uri.search(line)
                 if md:
@@ -244,62 +247,62 @@ class UDPHandler(socketserver.BaseRequestHandler):
             md = rx_expires.search(line)
             if md:
                 header_expires = md.group(1)
-        
+
         if rx_invalid.search(contact) or rx_invalid2.search(contact):
             if fromm in registrar:
                 del registrar[fromm]
-            self.sendResponse("488 Not Acceptable Here")    
+            self.sendResponse(not_acceptable_here_488)
             return
         if len(contact_expires) > 0:
             expires = int(contact_expires)
         elif len(header_expires) > 0:
             expires = int(header_expires)
-            
+
         if expires == 0:
             if fromm in registrar:
                 del registrar[fromm]
-                self.sendResponse("200 0K")
+                self.sendResponse(ok_200)
                 return
         else:
             now = int(time.time())
             validity = now + expires
 
-        logging.info("From: %s - Contact: %s" % (fromm,contact))
+        logging.info("From: %s - Contact: %s" % (fromm, contact))
         logging.debug("Client address: %s:%s" % self.client_address)
         logging.debug("Expires= %d" % expires)
-        registrar[fromm]=[contact,self.socket,self.client_address,validity]
+        registrar[fromm] = [contact, self.socket, self.client_address, validity]
         self.debugRegister()
-        self.sendResponse("200 0K")
-        
+        self.sendResponse(ok_200)
+
     def processInvite(self):
         logging.debug("-----------------")
         logging.debug(" INVITE received ")
         logging.debug("-----------------")
         origin = self.getOrigin()
         if len(origin) == 0 or origin not in registrar:
-            self.sendResponse("400 Bad Request")
+            self.sendResponse(bad_request_400)
             return
         destination = self.getDestination()
         if len(destination) > 0:
             logging.info("destination %s" % destination)
-            if destination in registrar and self.checkValidity(destination): # registrar.has_key(destination)
-                socket,claddr = self.getSocketInfo(destination)
-                #self.changeRequestUri()
+            if destination in registrar and self.checkValidity(destination):
+                socket, claddr = self.getSocketInfo(destination)
+                # self.changeRequestUri()
                 self.data = self.addTopVia()
                 data = self.removeRouteHeader()
-                #insert Record-Route
-                data.insert(1,recordroute)
+                # insert Record-Route
+                data.insert(1, recordroute)
                 text = "\r\n".join(data)
                 text = text.encode("utf-8")
-                socket.sendto(text , claddr)
+                socket.sendto(text, claddr)
                 showtime()
                 logging.info("<<< %s" % data[0])
-                logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text),text))
+                logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
             else:
-                self.sendResponse("480 Temporarily Unavailable")
+                self.sendResponse(unvailable_480)
         else:
-            self.sendResponse("500 Server Internal Error")
-                
+            self.sendResponse(server_internal_500)
+
     def processAck(self):
         logging.debug("--------------")
         logging.debug(" ACK received ")
@@ -307,77 +310,105 @@ class UDPHandler(socketserver.BaseRequestHandler):
         destination = self.getDestination()
         if len(destination) > 0:
             logging.info("destination %s" % destination)
-            if destination in registrar: #registrar.has_key(destination):
-                socket,claddr = self.getSocketInfo(destination)
-                #self.changeRequestUri()
+            if destination in registrar:  # registrar.has_key(destination):
+                socket, claddr = self.getSocketInfo(destination)
+                # self.changeRequestUri()
                 self.data = self.addTopVia()
                 data = self.removeRouteHeader()
-                #insert Record-Route
-                data.insert(1,recordroute)
+                # insert Record-Route
+                data.insert(1, recordroute)
                 text = "\r\n".join(data)
                 text = text.encode("utf-8")
-                socket.sendto(text,claddr)
+                socket.sendto(text, claddr)
                 showtime()
                 logging.info("<<< %s" % data[0])
-                logging.debug( "---\n<< server send [%d]:\n%s\n---" % (len(text),text))
-                
+                logging.info("ack sss")
+                logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
+
     def processNonInvite(self):
         logging.debug("----------------------")
         logging.debug(" NonInvite received   ")
         logging.debug("----------------------")
         origin = self.getOrigin()
-        if len(origin) == 0 or origin not in registrar: # not registrar.has_key(origin):
-            self.sendResponse("400 Bad Request")
+        if len(origin) == 0 or origin not in registrar:  # not registrar.has_key(origin):
+            self.sendResponse(bad_request_400)
             return
         destination = self.getDestination()
         if len(destination) > 0:
             logging.info("destination %s" % destination)
             if destination in registrar and self.checkValidity(destination):
-                socket,claddr = self.getSocketInfo(destination)
-                #self.changeRequestUri()
+                socket, claddr = self.getSocketInfo(destination)
+                # self.changeRequestUri()
                 self.data = self.addTopVia()
                 data = self.removeRouteHeader()
-                #insert Record-Route
-                data.insert(1,recordroute)
+                # insert Record-Route
+                data.insert(1, recordroute)
                 text = "\r\n".join(data)
                 text = text.encode("utf-8")
-                socket.sendto(text , claddr)
+                socket.sendto(text, claddr)
                 showtime()
                 logging.info("<<< %s" % data[0])
-                logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text),text))    
+                logging.info("non invitte")
+                logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
             else:
-                self.sendResponse("406 Not Acceptable")
+                self.sendResponse(not_acceptable_406)
         else:
-            self.sendResponse("500 Server Internal Error")
-                
+            self.sendResponse(server_internal_500)
+
     def processCode(self):
+        global last_ringing
+
         origin = self.getOrigin()
         if len(origin) > 0:
             logging.debug("origin %s" % origin)
-            if origin in registrar: # registrar.has_key(origin):
-                socket,claddr = self.getSocketInfo(origin)
+            if origin in registrar:
+                socket, claddr = self.getSocketInfo(origin)
                 self.data = self.removeRouteHeader()
                 data = self.removeTopVia()
                 text = "\r\n".join(data)
                 text = text.encode("utf-8")
-                socket.sendto(text,claddr)
+                socket.sendto(text, claddr)
                 showtime()
                 logging.info("<<< %s" % data[0])
-                logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text),text))
-                
-                
+                logging.info("process code")
+                logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
+
+                # zdvihol - 200
+                # odmietol - 603
+                # busy - 486
+                if "180" in data[0]:
+                    # nedokazem len na zaklade 200 urcit ci bol hovor prijaty
+                    # pretoze kod 200 je spracovavany aj vramci register
+                    # preto ak pred kodom 200 bolo 180 ringing tak viem ze hovor bol prijaty
+                    # pretoze sa jedna o odpoved na INVITE
+                    last_ringing = True
+                else:
+                    if "486" in data[0]:
+                        logging.info("Hovor medzi %s a %s nebol prijaty - busy" % (self.getOrigin(), self.getDestination()))
+                        logging.info("Hovor medzi %s a %s bol ukonceny" % (self.getOrigin(), self.getDestination()))
+                    elif "603" in data[0]:
+                        logging.info("Hovor medzi %s a %s bol odmietnuty" % (self.getOrigin(), self.getDestination()))
+                        logging.info("Hovor medzi %s a %s bol ukonceny" % (self.getOrigin(), self.getDestination()))
+                    elif last_ringing and ("200" in data[0]):
+                        logging.info("Hovor medzi %s a %s bol prijaty" % (self.getOrigin(), self.getDestination()))
+
+                    last_ringing = False
+
+
     def processRequest(self):
-        #print "processRequest"
+        # print "processRequest"
         if len(self.data) > 0:
             request_uri = self.data[0]
             if rx_register.search(request_uri):
                 self.processRegister()
             elif rx_invite.search(request_uri):
                 self.processInvite()
+                logging.info("%s vola %s" % (self.getOrigin(), self.getDestination()))
             elif rx_ack.search(request_uri):
                 self.processAck()
             elif rx_bye.search(request_uri):
                 self.processNonInvite()
+                logging.info("Hovor medzi %s a %s bol ukonceny" % (self.getOrigin(), self.getDestination()))
             elif rx_cancel.search(request_uri):
                 self.processNonInvite()
             elif rx_options.search(request_uri):
@@ -393,19 +424,19 @@ class UDPHandler(socketserver.BaseRequestHandler):
             elif rx_update.search(request_uri):
                 self.processNonInvite()
             elif rx_subscribe.search(request_uri):
-                self.sendResponse("200 0K")
+                self.sendResponse(ok_200)
             elif rx_publish.search(request_uri):
-                self.sendResponse("200 0K")
+                self.sendResponse(ok_200)
             elif rx_notify.search(request_uri):
-                self.sendResponse("200 0K")
+                self.sendResponse(ok_200)
             elif rx_code.search(request_uri):
                 self.processCode()
             else:
-                logging.error("request_uri %s" % request_uri)          
-                #print "message %s unknown" % self.data
-    
+                logging.error("request_uri %s" % request_uri)
+                # print "message %s unknown" % self.data
+
     def handle(self):
-        #socket.setdefaulttimeout(120)
+        # socket.setdefaulttimeout(120)
         try:
             data = self.request[0].decode("utf-8")
             self.data = data.split("\r\n")
