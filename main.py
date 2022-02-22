@@ -4,13 +4,16 @@ import time
 import logging
 import sipfullproxy
 
-
-# ok_200 = "200 OK"
-# not_acceptable_here_488 = "488 Not Acceptable Here"
-# bad_request_400 = "400 Bad Request"
-# unvailable_480 = "480 Temporarily Unavailable"
-# server_internal_500 = "500 Server Internal Error"
-# not_acceptable_406 = "406 Not Acceptable"
+# response_codes_dict = {
+#     200: "200 OK",
+#
+#     400: "400 Bad Request",
+#     406: "406 Not Acceptable",
+#     480: "480 Temporarily Unavailable",
+#     488: "488 Not Acceptable Here",
+#
+#     500: "500 Server Internal Error",
+# }
 
 response_codes_dict = {
     200: "200 OK",
@@ -25,7 +28,7 @@ response_codes_dict = {
 
 
 def main():
-    print(response_codes_dict[200])
+    print("Server spustený...\n")
     logging.basicConfig(format='%(asctime)s: %(message)s', filename='dennik.txt', level=logging.INFO, datefmt='%H:%M:%S')
     logging.info(time.strftime("%a, %d %b %Y %H:%M:%S ", time.localtime()))
 
