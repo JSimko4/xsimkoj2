@@ -1,51 +1,652 @@
-19:40:18: Tue, 22 Feb 2022 19:40:18 
-19:40:24: >>> INVITE sip:pocitac@147.175.191.134 SIP/2.0
-19:40:24: <<< SIP/2.0 400 Zly rikvest
-19:40:24: mobil@147.175.191.134 vola pocitac@147.175.191.134
-19:40:24: >>> ACK sip:pocitac@147.175.191.134 SIP/2.0
-19:40:24: destination pocitac@147.175.191.134
-19:40:28: >>> REGISTER sip:147.175.191.134 SIP/2.0
-19:40:28: From: mobil@147.175.191.134 - Contact: 147.175.190.161:48248
-19:40:28: <<< SIP/2.0 200 OK VYBAVENE
-19:40:33: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
-19:40:33: From: pocitac@147.175.191.134 - Contact: 147.175.191.134:62242
-19:40:33: <<< SIP/2.0 200 OK VYBAVENE
-19:40:34: >>> PUBLISH sip:pocitac@147.175.191.134:5060 SIP/2.0
-19:40:34: <<< SIP/2.0 200 OK VYBAVENE
-19:40:34: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
-19:40:34: From: pocitac@147.175.191.134 - Contact: 147.175.191.134:62242
-19:40:34: <<< SIP/2.0 200 OK VYBAVENE
-19:40:36: >>> INVITE sip:pocitac@147.175.191.134 SIP/2.0
-19:40:36: destination pocitac@147.175.191.134
-19:40:36: <<< INVITE sip:pocitac@147.175.191.134 SIP/2.0
-19:40:36: mobil@147.175.191.134 vola pocitac@147.175.191.134
-19:40:36: >>> SIP/2.0 100 Trying
-19:40:36: <<< SIP/2.0 100 Trying
-19:40:36: process code
-19:40:36: >>> SIP/2.0 180 Ringing
-19:40:36: <<< SIP/2.0 180 Ringing
-19:40:36: process code
-19:40:39: >>> SIP/2.0 200 Ok
-19:40:39: <<< SIP/2.0 200 Ok
-19:40:39: process code
-19:40:39: Hovor medzi mobil@147.175.191.134 a pocitac@147.175.191.134 bol prijaty
-19:40:40: >>> SIP/2.0 200 Ok
-19:40:40: <<< SIP/2.0 200 Ok
-19:40:40: process code
-19:40:41: >>> SIP/2.0 200 Ok
-19:40:41: <<< SIP/2.0 200 Ok
-19:40:41: process code
-19:40:43: >>> SIP/2.0 200 Ok
-19:40:43: <<< SIP/2.0 200 Ok
-19:40:43: process code
-19:40:47: >>> SIP/2.0 200 Ok
-19:40:47: <<< SIP/2.0 200 Ok
-19:40:47: process code
-19:40:47: >>> BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
-19:40:47: destination mobil@147.175.191.134
-19:40:47: <<< BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
-19:40:47: non invitte
-19:40:47: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol ukonceny
-19:40:47: >>> SIP/2.0 200 Ok
-19:40:47: <<< SIP/2.0 200 Ok
-19:40:47: process code
+20:37:13: Tue, 22 Feb 2022 20:37:13 
+20:37:17: >>> REGISTER sip:147.175.191.134 SIP/2.0
+20:37:17: From: mobil@147.175.191.134 - Contact: 147.175.190.161:48248
+20:37:17: <<< SIP/2.0 200 OK
+20:37:26: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+20:37:26: From: mtaa1@147.175.191.134 - Contact: 147.175.191.131:62968
+20:37:26: <<< SIP/2.0 200 OK
+20:37:32: >>> INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:37:32: destination mtaa1@147.175.191.134
+20:37:32: <<< INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:37:32: mobil@147.175.191.134 vola mtaa1@147.175.191.134
+20:37:32: >>> SIP/2.0 100 Trying
+20:37:32: <<< SIP/2.0 100 Trying
+20:37:32: process code
+20:37:32: >>> SIP/2.0 180 Ringing
+20:37:32: <<< SIP/2.0 180 Ringing
+20:37:32: process code
+20:37:34: >>> SIP/2.0 200 Ok
+20:37:34: <<< SIP/2.0 200 Ok
+20:37:34: process code
+20:37:34: Hovor medzi mobil@147.175.191.134 a mtaa1@147.175.191.134 bol prijaty
+20:37:35: >>> SIP/2.0 200 Ok
+20:37:35: <<< SIP/2.0 200 Ok
+20:37:35: process code
+20:37:36: >>> SIP/2.0 200 Ok
+20:37:36: <<< SIP/2.0 200 Ok
+20:37:36: process code
+20:37:38: >>> SIP/2.0 200 Ok
+20:37:38: <<< SIP/2.0 200 Ok
+20:37:38: process code
+20:37:42: >>> SIP/2.0 200 Ok
+20:37:42: <<< SIP/2.0 200 Ok
+20:37:42: process code
+20:37:46: >>> SIP/2.0 200 Ok
+20:37:46: <<< SIP/2.0 200 Ok
+20:37:46: process code
+20:37:50: >>> SIP/2.0 200 Ok
+20:37:50: <<< SIP/2.0 200 Ok
+20:37:50: process code
+20:37:54: >>> SIP/2.0 200 Ok
+20:37:54: <<< SIP/2.0 200 Ok
+20:37:54: process code
+20:37:58: >>> SIP/2.0 200 Ok
+20:37:58: <<< SIP/2.0 200 Ok
+20:37:58: process code
+20:38:02: >>> SIP/2.0 200 Ok
+20:38:02: <<< SIP/2.0 200 Ok
+20:38:02: process code
+20:38:03: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+20:38:03: From: pocitac@147.175.191.134 - Contact: 147.175.191.134:54186
+20:38:03: <<< SIP/2.0 200 OK
+20:38:04: >>> PUBLISH sip:pocitac@147.175.191.134:5060 SIP/2.0
+20:38:04: <<< SIP/2.0 200 OK
+20:38:06: >>> SIP/2.0 200 Ok
+20:38:06: <<< SIP/2.0 200 Ok
+20:38:06: process code
+20:39:45: Tue, 22 Feb 2022 20:39:45 
+20:39:47: >>> REGISTER sip:147.175.191.134 SIP/2.0
+20:39:47: From: mobil@147.175.191.134 - Contact: 147.175.190.161:48248
+20:39:47: <<< SIP/2.0 200 OK
+20:39:53: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+20:39:53: From: mtaa1@147.175.191.134 - Contact: 147.175.191.131:62968
+20:39:53: <<< SIP/2.0 200 OK
+20:39:58: >>> INVITE sip:mobil@147.175.191.134 SIP/2.0
+20:39:58: destination mobil@147.175.191.134
+20:39:58: <<< INVITE sip:mobil@147.175.191.134 SIP/2.0
+20:39:58: mtaa1@147.175.191.134 vola mobil@147.175.191.134
+20:39:58: >>> SIP/2.0 100 Trying
+20:39:58: <<< SIP/2.0 100 Trying
+20:39:58: process code
+20:39:58: >>> SIP/2.0 180 Ringing
+20:39:58: <<< SIP/2.0 180 Ringing
+20:39:58: process code
+20:40:03: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+20:40:03: From: pocitac@147.175.191.134 - Contact: 147.175.191.134:60373
+20:40:03: <<< SIP/2.0 200 OK
+20:40:04: >>> PUBLISH sip:pocitac@147.175.191.134:5060 SIP/2.0
+20:40:04: <<< SIP/2.0 200 OK
+20:40:04: >>> SIP/2.0 200 Ok
+20:40:04: <<< SIP/2.0 200 Ok
+20:40:04: process code
+20:40:04: Hovor medzi mtaa1@147.175.191.134 a mobil@147.175.191.134 bol prijaty
+20:40:06: >>> SIP/2.0 200 Ok
+20:40:06: <<< SIP/2.0 200 Ok
+20:40:06: process code
+20:40:06: >>> SIP/2.0 200 Ok
+20:40:06: <<< SIP/2.0 200 Ok
+20:40:06: process code
+20:40:08: >>> SIP/2.0 200 Ok
+20:40:08: <<< SIP/2.0 200 Ok
+20:40:08: process code
+20:40:12: >>> SIP/2.0 200 Ok
+20:40:12: <<< SIP/2.0 200 Ok
+20:40:12: process code
+20:40:16: >>> SIP/2.0 200 Ok
+20:40:16: <<< SIP/2.0 200 Ok
+20:40:16: process code
+20:40:20: >>> SIP/2.0 200 Ok
+20:40:20: <<< SIP/2.0 200 Ok
+20:40:20: process code
+20:40:24: >>> SIP/2.0 200 Ok
+20:40:24: <<< SIP/2.0 200 Ok
+20:40:24: process code
+20:40:28: >>> SIP/2.0 200 Ok
+20:40:28: <<< SIP/2.0 200 Ok
+20:40:28: process code
+20:40:32: >>> SIP/2.0 200 Ok
+20:40:32: <<< SIP/2.0 200 Ok
+20:40:32: process code
+20:40:36: >>> SIP/2.0 200 Ok
+20:40:36: <<< SIP/2.0 200 Ok
+20:40:36: process code
+20:40:50: >>> INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:40:50: destination mtaa1@147.175.191.134
+20:40:50: <<< INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:40:50: pocitac@147.175.191.134 vola mtaa1@147.175.191.134
+20:40:50: >>> SIP/2.0 100 Trying
+20:40:50: <<< SIP/2.0 100 Trying
+20:40:50: process code
+20:40:50: >>> SIP/2.0 180 Ringing
+20:40:50: <<< SIP/2.0 180 Ringing
+20:40:50: process code
+20:40:53: >>> SIP/2.0 200 Ok
+20:40:53: <<< SIP/2.0 200 Ok
+20:40:53: process code
+20:40:53: Hovor medzi pocitac@147.175.191.134 a mtaa1@147.175.191.134 bol prijaty
+20:40:54: >>> ACK sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:40:54: destination mtaa1@147.175.191.134
+20:40:54: <<< ACK sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:40:54: ack sss
+20:40:58: >>> BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:40:58: destination mtaa1@147.175.191.134
+20:40:58: <<< BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:40:58: non invitte
+20:40:58: Hovor medzi pocitac@147.175.191.134 a mtaa1@147.175.191.134 bol ukonceny
+20:40:58: >>> SIP/2.0 200 Ok
+20:40:58: <<< SIP/2.0 200 Ok
+20:40:58: process code
+20:41:05: >>> INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:41:05: destination mtaa1@147.175.191.134
+20:41:05: <<< INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:41:05: pocitac@147.175.191.134 vola mtaa1@147.175.191.134
+20:41:05: >>> SIP/2.0 100 Trying
+20:41:05: <<< SIP/2.0 100 Trying
+20:41:05: process code
+20:41:06: >>> SIP/2.0 180 Ringing
+20:41:06: <<< SIP/2.0 180 Ringing
+20:41:06: process code
+20:41:10: >>> SIP/2.0 200 Ok
+20:41:10: <<< SIP/2.0 200 Ok
+20:41:10: process code
+20:41:10: Hovor medzi pocitac@147.175.191.134 a mtaa1@147.175.191.134 bol prijaty
+20:41:10: >>> ACK sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:41:10: destination mtaa1@147.175.191.134
+20:41:10: <<< ACK sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:41:10: ack sss
+20:41:12: >>> BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:41:12: destination mtaa1@147.175.191.134
+20:41:12: <<< BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:41:12: non invitte
+20:41:12: Hovor medzi pocitac@147.175.191.134 a mtaa1@147.175.191.134 bol ukonceny
+20:41:12: >>> SIP/2.0 200 Ok
+20:41:12: <<< SIP/2.0 200 Ok
+20:41:12: process code
+20:41:17: >>> INVITE sip:mobil@147.175.191.134:5060 SIP/2.0
+20:41:17: destination mobil@147.175.191.134
+20:41:17: <<< INVITE sip:mobil@147.175.191.134:5060 SIP/2.0
+20:41:17: pocitac@147.175.191.134 vola mobil@147.175.191.134
+20:41:17: >>> SIP/2.0 100 Trying
+20:41:17: <<< SIP/2.0 100 Trying
+20:41:17: process code
+20:41:17: >>> SIP/2.0 180 Ringing
+20:41:17: <<< SIP/2.0 180 Ringing
+20:41:17: process code
+20:41:29: >>> SIP/2.0 200 Ok
+20:41:29: <<< SIP/2.0 200 Ok
+20:41:29: process code
+20:41:29: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol prijaty
+20:41:30: >>> ACK sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:41:30: destination mobil@147.175.191.134
+20:41:30: <<< ACK sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:41:30: ack sss
+20:41:32: >>> BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:41:32: destination mobil@147.175.191.134
+20:41:32: <<< BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:41:32: non invitte
+20:41:32: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol ukonceny
+20:41:32: >>> SIP/2.0 200 Ok
+20:41:32: <<< SIP/2.0 200 Ok
+20:41:32: process code
+20:41:35: >>> INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:41:35: destination pocitac@147.175.191.134
+20:41:35: <<< INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:41:35: mobil@147.175.191.134 vola pocitac@147.175.191.134
+20:41:35: >>> SIP/2.0 100 Trying
+20:41:35: <<< SIP/2.0 100 Trying
+20:41:35: process code
+20:41:35: >>> SIP/2.0 180 Ringing
+20:41:35: <<< SIP/2.0 180 Ringing
+20:41:35: process code
+20:41:37: >>> SIP/2.0 200 Ok
+20:41:37: <<< SIP/2.0 200 Ok
+20:41:37: process code
+20:41:37: Hovor medzi mobil@147.175.191.134 a pocitac@147.175.191.134 bol prijaty
+20:41:38: >>> SIP/2.0 200 Ok
+20:41:38: <<< SIP/2.0 200 Ok
+20:41:38: process code
+20:41:39: >>> SIP/2.0 200 Ok
+20:41:39: <<< SIP/2.0 200 Ok
+20:41:39: process code
+20:41:41: >>> SIP/2.0 200 Ok
+20:41:41: <<< SIP/2.0 200 Ok
+20:41:41: process code
+20:41:42: >>> BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:41:42: destination mobil@147.175.191.134
+20:41:42: <<< BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:41:42: non invitte
+20:41:42: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol ukonceny
+20:41:42: >>> SIP/2.0 200 Ok
+20:41:42: <<< SIP/2.0 200 Ok
+20:41:42: process code
+20:42:22: >>> INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:42:22: destination mtaa1@147.175.191.134
+20:42:22: <<< INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:42:22: pocitac@147.175.191.134 vola mtaa1@147.175.191.134
+20:42:22: >>> SIP/2.0 100 Trying
+20:42:22: <<< SIP/2.0 100 Trying
+20:42:22: process code
+20:42:22: >>> SIP/2.0 180 Ringing
+20:42:22: <<< SIP/2.0 180 Ringing
+20:42:22: process code
+20:42:27: >>> SIP/2.0 200 Ok
+20:42:27: <<< SIP/2.0 200 Ok
+20:42:27: process code
+20:42:27: Hovor medzi pocitac@147.175.191.134 a mtaa1@147.175.191.134 bol prijaty
+20:42:27: >>> ACK sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:42:27: destination mtaa1@147.175.191.134
+20:42:27: <<< ACK sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:42:27: ack sss
+20:42:44: >>> BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:42:44: destination mtaa1@147.175.191.134
+20:42:44: <<< BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:42:44: non invitte
+20:42:44: Hovor medzi pocitac@147.175.191.134 a mtaa1@147.175.191.134 bol ukonceny
+20:42:44: >>> SIP/2.0 200 Ok
+20:42:44: <<< SIP/2.0 200 Ok
+20:42:44: process code
+20:43:21: >>> INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:43:21: destination pocitac@147.175.191.134
+20:43:21: <<< INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:43:21: mtaa1@147.175.191.134 vola pocitac@147.175.191.134
+20:43:21: >>> SIP/2.0 100 Trying
+20:43:21: <<< SIP/2.0 100 Trying
+20:43:21: process code
+20:43:22: >>> SIP/2.0 180 Ringing
+20:43:22: <<< SIP/2.0 180 Ringing
+20:43:22: process code
+20:43:23: >>> SIP/2.0 200 Ok
+20:43:23: <<< SIP/2.0 200 Ok
+20:43:23: process code
+20:43:23: Hovor medzi mtaa1@147.175.191.134 a pocitac@147.175.191.134 bol prijaty
+20:43:24: >>> SIP/2.0 200 Ok
+20:43:24: <<< SIP/2.0 200 Ok
+20:43:24: process code
+20:43:25: >>> SIP/2.0 200 Ok
+20:43:25: <<< SIP/2.0 200 Ok
+20:43:25: process code
+20:43:27: >>> SIP/2.0 200 Ok
+20:43:27: <<< SIP/2.0 200 Ok
+20:43:27: process code
+20:43:31: >>> SIP/2.0 200 Ok
+20:43:31: <<< SIP/2.0 200 Ok
+20:43:31: process code
+20:43:35: >>> SIP/2.0 200 Ok
+20:43:35: <<< SIP/2.0 200 Ok
+20:43:35: process code
+20:43:39: >>> SIP/2.0 200 Ok
+20:43:39: <<< SIP/2.0 200 Ok
+20:43:39: process code
+20:43:43: >>> SIP/2.0 200 Ok
+20:43:43: <<< SIP/2.0 200 Ok
+20:43:43: process code
+20:43:47: >>> SIP/2.0 200 Ok
+20:43:47: <<< SIP/2.0 200 Ok
+20:43:47: process code
+20:43:51: >>> SIP/2.0 200 Ok
+20:43:51: <<< SIP/2.0 200 Ok
+20:43:51: process code
+20:43:55: >>> SIP/2.0 200 Ok
+20:43:55: <<< SIP/2.0 200 Ok
+20:43:55: process code
+20:43:55: >>> BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:43:55: destination mtaa1@147.175.191.134
+20:43:55: <<< BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:43:55: non invitte
+20:43:55: Hovor medzi pocitac@147.175.191.134 a mtaa1@147.175.191.134 bol ukonceny
+20:43:55: >>> SIP/2.0 200 Ok
+20:43:55: <<< SIP/2.0 200 Ok
+20:43:55: process code
+20:45:50: Tue, 22 Feb 2022 20:45:50 
+20:45:57: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+20:45:57: From: pocitac@147.175.191.134 - Contact: 25.77.34.156:61138
+20:45:57: <<< SIP/2.0 200 OK
+20:46:01: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+20:46:01: From: mtaa1@147.175.191.134 - Contact: 147.175.191.131:62968
+20:46:01: <<< SIP/2.0 200 OK
+20:46:08: >>> INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:46:08: destination pocitac@147.175.191.134
+20:46:08: <<< INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:46:08: mtaa1@147.175.191.134 vola pocitac@147.175.191.134
+20:46:08: >>> SIP/2.0 100 Trying
+20:46:08: <<< SIP/2.0 100 Trying
+20:46:08: process code
+20:46:09: >>> SIP/2.0 180 Ringing
+20:46:09: <<< SIP/2.0 180 Ringing
+20:46:09: process code
+20:46:11: >>> SIP/2.0 200 Ok
+20:46:11: <<< SIP/2.0 200 Ok
+20:46:11: process code
+20:46:11: Hovor medzi mtaa1@147.175.191.134 a pocitac@147.175.191.134 bol prijaty
+20:46:11: >>> SIP/2.0 200 Ok
+20:46:11: <<< SIP/2.0 200 Ok
+20:46:11: process code
+20:46:12: >>> SIP/2.0 200 Ok
+20:46:12: <<< SIP/2.0 200 Ok
+20:46:12: process code
+20:46:14: >>> SIP/2.0 200 Ok
+20:46:14: <<< SIP/2.0 200 Ok
+20:46:14: process code
+20:46:18: >>> SIP/2.0 200 Ok
+20:46:18: <<< SIP/2.0 200 Ok
+20:46:18: process code
+20:46:22: >>> SIP/2.0 200 Ok
+20:46:22: <<< SIP/2.0 200 Ok
+20:46:22: process code
+20:46:26: >>> SIP/2.0 200 Ok
+20:46:26: <<< SIP/2.0 200 Ok
+20:46:26: process code
+20:46:30: >>> BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:46:30: destination mtaa1@147.175.191.134
+20:46:30: <<< BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:46:30: non invitte
+20:46:30: Hovor medzi pocitac@147.175.191.134 a mtaa1@147.175.191.134 bol ukonceny
+20:46:30: >>> SIP/2.0 200 Ok
+20:46:30: <<< SIP/2.0 200 Ok
+20:46:30: process code
+20:47:05: >>> INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:47:05: <<< SIP/2.0 400 Bad Request
+20:47:05: mobil@147.175.191.134 vola mtaa1@147.175.191.134
+20:47:05: >>> ACK sip:mtaa1@147.175.191.134 SIP/2.0
+20:47:05: destination mtaa1@147.175.191.134
+20:47:05: <<< ACK sip:mtaa1@147.175.191.134 SIP/2.0
+20:47:05: ack sss
+20:47:05: >>> SIP/2.0 405 Method not allowed
+20:47:08: >>> REGISTER sip:147.175.191.134 SIP/2.0
+20:47:08: From: mobil@147.175.191.134 - Contact: 147.175.190.161:48248
+20:47:08: <<< SIP/2.0 200 OK
+20:47:09: >>> INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:47:09: destination mtaa1@147.175.191.134
+20:47:09: <<< INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:47:09: mobil@147.175.191.134 vola mtaa1@147.175.191.134
+20:47:09: >>> SIP/2.0 100 Trying
+20:47:09: <<< SIP/2.0 100 Trying
+20:47:09: process code
+20:47:09: >>> SIP/2.0 180 Ringing
+20:47:09: <<< SIP/2.0 180 Ringing
+20:47:09: process code
+20:47:14: >>> SIP/2.0 200 Ok
+20:47:14: <<< SIP/2.0 200 Ok
+20:47:14: process code
+20:47:14: Hovor medzi mobil@147.175.191.134 a mtaa1@147.175.191.134 bol prijaty
+20:47:15: >>> SIP/2.0 200 Ok
+20:47:15: <<< SIP/2.0 200 Ok
+20:47:15: process code
+20:47:16: >>> SIP/2.0 200 Ok
+20:47:16: <<< SIP/2.0 200 Ok
+20:47:16: process code
+20:47:18: >>> SIP/2.0 200 Ok
+20:47:18: <<< SIP/2.0 200 Ok
+20:47:18: process code
+20:47:22: >>> SIP/2.0 200 Ok
+20:47:22: <<< SIP/2.0 200 Ok
+20:47:22: process code
+20:47:26: >>> SIP/2.0 200 Ok
+20:47:26: <<< SIP/2.0 200 Ok
+20:47:26: process code
+20:47:30: >>> SIP/2.0 200 Ok
+20:47:30: <<< SIP/2.0 200 Ok
+20:47:30: process code
+20:47:34: >>> SIP/2.0 200 Ok
+20:47:34: <<< SIP/2.0 200 Ok
+20:47:34: process code
+20:47:38: >>> SIP/2.0 200 Ok
+20:47:38: <<< SIP/2.0 200 Ok
+20:47:38: process code
+20:47:42: >>> SIP/2.0 200 Ok
+20:47:42: <<< SIP/2.0 200 Ok
+20:47:42: process code
+20:47:46: >>> SIP/2.0 200 Ok
+20:47:46: <<< SIP/2.0 200 Ok
+20:47:46: process code
+20:49:05: Tue, 22 Feb 2022 20:49:05 
+20:49:11: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+20:49:11: From: pocitac@147.175.191.134 - Contact: 147.175.191.134:60612
+20:49:11: <<< SIP/2.0 200 OK
+20:49:11: >>> PUBLISH sip:pocitac@147.175.191.134:5060 SIP/2.0
+20:49:11: <<< SIP/2.0 200 OK
+20:49:16: >>> INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:49:16: <<< SIP/2.0 400 Bad Request
+20:49:16: mobil@147.175.191.134 vola pocitac@147.175.191.134
+20:49:16: >>> ACK sip:pocitac@147.175.191.134 SIP/2.0
+20:49:16: destination pocitac@147.175.191.134
+20:49:16: <<< ACK sip:pocitac@147.175.191.134 SIP/2.0
+20:49:16: ack sss
+20:49:16: >>> SIP/2.0 405 Method not allowed
+20:49:18: >>> INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:49:18: <<< SIP/2.0 400 Bad Request
+20:49:18: mobil@147.175.191.134 vola pocitac@147.175.191.134
+20:49:18: >>> ACK sip:pocitac@147.175.191.134 SIP/2.0
+20:49:18: destination pocitac@147.175.191.134
+20:49:18: <<< ACK sip:pocitac@147.175.191.134 SIP/2.0
+20:49:18: ack sss
+20:49:18: >>> SIP/2.0 405 Method not allowed
+20:49:21: >>> REGISTER sip:147.175.191.134 SIP/2.0
+20:49:21: From: mobil@147.175.191.134 - Contact: 147.175.190.161:48248
+20:49:21: <<< SIP/2.0 200 OK
+20:49:22: >>> INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:49:22: destination pocitac@147.175.191.134
+20:49:22: <<< INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:49:22: mobil@147.175.191.134 vola pocitac@147.175.191.134
+20:49:22: >>> SIP/2.0 100 Trying
+20:49:22: <<< SIP/2.0 100 Trying
+20:49:22: process code
+20:49:22: >>> SIP/2.0 180 Ringing
+20:49:22: <<< SIP/2.0 180 Ringing
+20:49:22: process code
+20:49:25: >>> SIP/2.0 200 Ok
+20:49:25: <<< SIP/2.0 200 Ok
+20:49:25: process code
+20:49:25: Hovor medzi mobil@147.175.191.134 a pocitac@147.175.191.134 bol prijaty
+20:49:26: >>> SIP/2.0 200 Ok
+20:49:26: <<< SIP/2.0 200 Ok
+20:49:26: process code
+20:49:27: >>> SIP/2.0 200 Ok
+20:49:27: <<< SIP/2.0 200 Ok
+20:49:27: process code
+20:49:29: >>> SIP/2.0 200 Ok
+20:49:29: <<< SIP/2.0 200 Ok
+20:49:29: process code
+20:49:33: >>> SIP/2.0 200 Ok
+20:49:33: <<< SIP/2.0 200 Ok
+20:49:33: process code
+20:49:37: >>> SIP/2.0 200 Ok
+20:49:37: <<< SIP/2.0 200 Ok
+20:49:37: process code
+20:49:39: >>> BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:49:39: destination mobil@147.175.191.134
+20:49:39: <<< BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:49:39: non invitte
+20:49:39: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol ukonceny
+20:49:39: >>> SIP/2.0 200 Ok
+20:49:39: <<< SIP/2.0 200 Ok
+20:49:39: process code
+20:49:44: >>> INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:49:44: destination mtaa1@147.175.191.134
+20:49:44: <<< SIP/2.0 480 Temporarily Unavailable
+20:49:44: mobil@147.175.191.134 vola mtaa1@147.175.191.134
+20:49:44: >>> ACK sip:mtaa1@147.175.191.134 SIP/2.0
+20:49:44: destination mtaa1@147.175.191.134
+20:49:48: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+20:49:48: From: mtaa1@147.175.191.134 - Contact: 147.175.191.131:62968
+20:49:48: <<< SIP/2.0 200 OK
+20:49:51: >>> INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:49:51: destination mtaa1@147.175.191.134
+20:49:51: <<< INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:49:51: mobil@147.175.191.134 vola mtaa1@147.175.191.134
+20:49:51: >>> SIP/2.0 100 Trying
+20:49:51: <<< SIP/2.0 100 Trying
+20:49:51: process code
+20:49:52: >>> SIP/2.0 180 Ringing
+20:49:52: <<< SIP/2.0 180 Ringing
+20:49:52: process code
+20:49:54: >>> SIP/2.0 200 Ok
+20:49:54: <<< SIP/2.0 200 Ok
+20:49:54: process code
+20:49:54: Hovor medzi mobil@147.175.191.134 a mtaa1@147.175.191.134 bol prijaty
+20:49:55: >>> SIP/2.0 200 Ok
+20:49:55: <<< SIP/2.0 200 Ok
+20:49:55: process code
+20:49:56: >>> SIP/2.0 200 Ok
+20:49:56: <<< SIP/2.0 200 Ok
+20:49:56: process code
+20:49:58: >>> SIP/2.0 200 Ok
+20:49:58: <<< SIP/2.0 200 Ok
+20:49:58: process code
+20:50:02: >>> SIP/2.0 200 Ok
+20:50:02: <<< SIP/2.0 200 Ok
+20:50:02: process code
+20:50:06: >>> SIP/2.0 200 Ok
+20:50:06: <<< SIP/2.0 200 Ok
+20:50:06: process code
+20:50:10: >>> SIP/2.0 200 Ok
+20:50:10: <<< SIP/2.0 200 Ok
+20:50:10: process code
+20:50:14: >>> SIP/2.0 200 Ok
+20:50:14: <<< SIP/2.0 200 Ok
+20:50:14: process code
+20:50:18: >>> SIP/2.0 200 Ok
+20:50:18: <<< SIP/2.0 200 Ok
+20:50:18: process code
+20:50:22: >>> SIP/2.0 200 Ok
+20:50:22: <<< SIP/2.0 200 Ok
+20:50:22: process code
+20:50:26: >>> SIP/2.0 200 Ok
+20:50:26: <<< SIP/2.0 200 Ok
+20:50:26: process code
+20:50:30: >>> INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:50:30: destination pocitac@147.175.191.134
+20:50:30: <<< INVITE sip:pocitac@147.175.191.134 SIP/2.0
+20:50:30: mobil@147.175.191.134 vola pocitac@147.175.191.134
+20:50:30: >>> SIP/2.0 100 Trying
+20:50:30: <<< SIP/2.0 100 Trying
+20:50:30: process code
+20:50:30: >>> SIP/2.0 180 Ringing
+20:50:30: <<< SIP/2.0 180 Ringing
+20:50:30: process code
+20:50:32: >>> SIP/2.0 200 Ok
+20:50:32: <<< SIP/2.0 200 Ok
+20:50:32: process code
+20:50:32: Hovor medzi mobil@147.175.191.134 a pocitac@147.175.191.134 bol prijaty
+20:50:33: >>> SIP/2.0 200 Ok
+20:50:33: <<< SIP/2.0 200 Ok
+20:50:33: process code
+20:50:34: >>> SIP/2.0 200 Ok
+20:50:34: <<< SIP/2.0 200 Ok
+20:50:34: process code
+20:50:36: >>> SIP/2.0 200 Ok
+20:50:36: <<< SIP/2.0 200 Ok
+20:50:36: process code
+20:50:40: >>> SIP/2.0 200 Ok
+20:50:40: <<< SIP/2.0 200 Ok
+20:50:40: process code
+20:50:44: >>> SIP/2.0 200 Ok
+20:50:44: <<< SIP/2.0 200 Ok
+20:50:44: process code
+20:50:46: >>> INVITE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:50:46: destination mobil@147.175.191.134
+20:50:46: <<< INVITE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:50:46: pocitac@147.175.191.134 vola mobil@147.175.191.134
+20:50:46: >>> SIP/2.0 100 Trying
+20:50:46: <<< SIP/2.0 100 Trying
+20:50:46: process code
+20:50:46: >>> SIP/2.0 500 Server internal error
+20:50:46: <<< SIP/2.0 500 Server internal error
+20:50:46: process code
+20:50:47: >>> ACK sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:50:47: destination mobil@147.175.191.134
+20:50:47: <<< ACK sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:50:47: ack sss
+20:50:48: >>> SIP/2.0 200 Ok
+20:50:48: <<< SIP/2.0 200 Ok
+20:50:48: process code
+20:50:52: >>> SIP/2.0 200 Ok
+20:50:52: <<< SIP/2.0 200 Ok
+20:50:52: process code
+20:50:56: >>> SIP/2.0 200 Ok
+20:50:56: <<< SIP/2.0 200 Ok
+20:50:56: process code
+20:51:00: >>> SIP/2.0 200 Ok
+20:51:00: <<< SIP/2.0 200 Ok
+20:51:00: process code
+20:51:01: >>> BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:51:01: destination mobil@147.175.191.134
+20:51:01: <<< BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:51:01: non invitte
+20:51:01: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol ukonceny
+20:51:01: >>> SIP/2.0 200 Ok
+20:51:01: <<< SIP/2.0 200 Ok
+20:51:01: process code
+20:51:27: >>> INVITE sip:mtaa@147.175.191.134:5060 SIP/2.0
+20:51:27: destination mtaa@147.175.191.134
+20:51:27: <<< SIP/2.0 480 Temporarily Unavailable
+20:51:27: pocitac@147.175.191.134 vola mtaa@147.175.191.134
+20:51:27: >>> ACK sip:mtaa@147.175.191.134:5060 SIP/2.0
+20:51:27: destination mtaa@147.175.191.134
+20:51:33: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+20:51:33: From: mtaa1@147.175.191.134 - Contact: 147.175.191.131:62968
+20:51:33: <<< SIP/2.0 200 OK
+20:51:38: >>> INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:51:38: destination mtaa1@147.175.191.134
+20:51:38: <<< INVITE sip:mtaa1@147.175.191.134 SIP/2.0
+20:51:38: pocitac@147.175.191.134 vola mtaa1@147.175.191.134
+20:51:38: >>> SIP/2.0 100 Trying
+20:51:38: <<< SIP/2.0 100 Trying
+20:51:38: process code
+20:51:38: >>> SIP/2.0 180 Ringing
+20:51:38: <<< SIP/2.0 180 Ringing
+20:51:38: process code
+20:51:40: >>> SIP/2.0 200 Ok
+20:51:40: <<< SIP/2.0 200 Ok
+20:51:40: process code
+20:51:40: Hovor medzi pocitac@147.175.191.134 a mtaa1@147.175.191.134 bol prijaty
+20:51:41: >>> SIP/2.0 200 Ok
+20:51:41: <<< SIP/2.0 200 Ok
+20:51:41: process code
+20:51:41: >>> ACK sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:51:41: destination mtaa1@147.175.191.134
+20:51:41: <<< ACK sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:51:41: ack sss
+20:51:41: >>> ACK sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:51:41: destination mtaa1@147.175.191.134
+20:51:41: <<< ACK sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:51:41: ack sss
+20:51:47: >>> BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:51:47: destination mtaa1@147.175.191.134
+20:51:47: <<< BYE sip:mtaa1@147.175.191.131:62968;transport=udp SIP/2.0
+20:51:47: non invitte
+20:51:47: Hovor medzi pocitac@147.175.191.134 a mtaa1@147.175.191.134 bol ukonceny
+20:51:47: >>> SIP/2.0 200 Ok
+20:51:47: <<< SIP/2.0 200 Ok
+20:51:47: process code
+20:51:52: >>> REGISTER sip:147.175.191.134:5060 SIP/2.0
+20:51:52: From: mtaa1@147.175.191.134 - Contact: 147.175.191.131:62968
+20:51:52: <<< SIP/2.0 200 OK
+20:51:52: >>> INVITE sip:mobil@147.175.191.134:5060 SIP/2.0
+20:51:52: destination mobil@147.175.191.134
+20:51:52: <<< INVITE sip:mobil@147.175.191.134:5060 SIP/2.0
+20:51:52: pocitac@147.175.191.134 vola mobil@147.175.191.134
+20:51:52: >>> SIP/2.0 100 Trying
+20:51:52: <<< SIP/2.0 100 Trying
+20:51:52: process code
+20:51:52: >>> SIP/2.0 180 Ringing
+20:51:52: <<< SIP/2.0 180 Ringing
+20:51:52: process code
+20:51:54: >>> SIP/2.0 200 Ok
+20:51:54: <<< SIP/2.0 200 Ok
+20:51:54: process code
+20:51:54: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol prijaty
+20:51:55: >>> ACK sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:51:55: destination mobil@147.175.191.134
+20:51:55: <<< ACK sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:51:55: ack sss
+20:52:11: >>> BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:52:11: destination mobil@147.175.191.134
+20:52:11: <<< BYE sip:mobil@147.175.190.161:48248;transport=udp SIP/2.0
+20:52:11: non invitte
+20:52:11: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol ukonceny
+20:52:11: >>> SIP/2.0 200 Ok
+20:52:11: <<< SIP/2.0 200 Ok
+20:52:11: process code
+20:53:46: >>> PUBLISH sip:mtaa1@147.175.191.134:5060 SIP/2.0
+20:53:46: <<< SIP/2.0 200 OK

@@ -22,8 +22,7 @@ import sys
 import time
 import logging
 
-from main import ok_200, not_acceptable_here_488, bad_request_400, unvailable_480, server_internal_500, \
-    not_acceptable_406
+from main import response_codes_dict
 
 HOST, PORT = '0.0.0.0', 5060
 rx_register = re.compile("^REGISTER")
@@ -251,7 +250,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
         if rx_invalid.search(contact) or rx_invalid2.search(contact):
             if fromm in registrar:
                 del registrar[fromm]
-            self.sendResponse(not_acceptable_here_488)
+            self.sendResponse(response_codes_dict[488])
             return
         if len(contact_expires) > 0:
             expires = int(contact_expires)
@@ -261,7 +260,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
         if expires == 0:
             if fromm in registrar:
                 del registrar[fromm]
-                self.sendResponse(ok_200)
+                self.sendResponse(response_codes_dict[200])
                 return
         else:
             now = int(time.time())
@@ -272,7 +271,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
         logging.debug("Expires= %d" % expires)
         registrar[fromm] = [contact, self.socket, self.client_address, validity]
         self.debugRegister()
-        self.sendResponse(ok_200)
+        self.sendResponse(response_codes_dict[200])
 
     def processInvite(self):
         logging.debug("-----------------")
@@ -280,7 +279,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
         logging.debug("-----------------")
         origin = self.getOrigin()
         if len(origin) == 0 or origin not in registrar:
-            self.sendResponse(bad_request_400)
+            self.sendResponse(response_codes_dict[400])
             return
         destination = self.getDestination()
         if len(destination) > 0:
@@ -299,9 +298,9 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 logging.info("<<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
             else:
-                self.sendResponse(unvailable_480)
+                self.sendResponse(response_codes_dict[480])
         else:
-            self.sendResponse(server_internal_500)
+            self.sendResponse(response_codes_dict[500])
 
     def processAck(self):
         logging.debug("--------------")
@@ -330,8 +329,8 @@ class UDPHandler(socketserver.BaseRequestHandler):
         logging.debug(" NonInvite received   ")
         logging.debug("----------------------")
         origin = self.getOrigin()
-        if len(origin) == 0 or origin not in registrar:  # not registrar.has_key(origin):
-            self.sendResponse(bad_request_400)
+        if len(origin) == 0 or origin not in registrar:
+            self.sendResponse(response_codes_dict[400])
             return
         destination = self.getDestination()
         if len(destination) > 0:
@@ -351,9 +350,9 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 logging.info("non invitte")
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
             else:
-                self.sendResponse(not_acceptable_406)
+                self.sendResponse(response_codes_dict[406])
         else:
-            self.sendResponse(server_internal_500)
+            self.sendResponse(response_codes_dict[500])
 
     def processCode(self):
         global last_ringing
@@ -424,11 +423,11 @@ class UDPHandler(socketserver.BaseRequestHandler):
             elif rx_update.search(request_uri):
                 self.processNonInvite()
             elif rx_subscribe.search(request_uri):
-                self.sendResponse(ok_200)
+                self.sendResponse(response_codes_dict[200])
             elif rx_publish.search(request_uri):
-                self.sendResponse(ok_200)
+                self.sendResponse(response_codes_dict[200])
             elif rx_notify.search(request_uri):
-                self.sendResponse(ok_200)
+                self.sendResponse(response_codes_dict[200])
             elif rx_code.search(request_uri):
                 self.processCode()
             else:
