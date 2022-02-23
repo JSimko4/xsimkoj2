@@ -24,7 +24,6 @@ import logging
 
 from main import response_codes_dict
 
-HOST, PORT = '0.0.0.0', 5060
 rx_register = re.compile("^REGISTER")
 rx_invite = re.compile("^INVITE")
 rx_ack = re.compile("^ACK")
@@ -296,6 +295,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 socket.sendto(text, claddr)
                 showtime()
                 logging.info("<<< %s" % data[0])
+                print("SERVER ODOSLAL: <<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
             else:
                 self.sendResponse(response_codes_dict[480])
@@ -348,6 +348,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 showtime()
                 logging.info("<<< %s" % data[0])
                 logging.info("non invitte")
+                print("SERVER ODOSLAL: <<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
             else:
                 self.sendResponse(response_codes_dict[406])
@@ -370,6 +371,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 showtime()
                 logging.info("<<< %s" % data[0])
                 logging.info("process code")
+                print("SERVER ODOSLAL: <<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
 
                 # zdvihol - 200
@@ -444,6 +446,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
             if rx_request_uri.search(request_uri) or rx_code.search(request_uri):
                 showtime()
                 logging.info(">>> %s" % request_uri)
+                print("SERVER PRIJAL: >>> %s" % data[0])
                 logging.debug("---\n>> server received [%d]:\n%s\n---" % (len(data), data))
                 logging.debug("Received from %s:%d" % self.client_address)
                 self.processRequest()
@@ -454,4 +457,5 @@ class UDPHandler(socketserver.BaseRequestHandler):
                     hexdump(data, ' ', 16)
                     logging.warning("---")
         except UnicodeDecodeError:
+            print("hm")
             pass
