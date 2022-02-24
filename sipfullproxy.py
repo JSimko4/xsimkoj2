@@ -15,10 +15,6 @@
 
 import socketserver
 import re
-import string
-import socket
-# import threading
-import sys
 import time
 import logging
 
@@ -71,6 +67,7 @@ topvia = ""
 registrar = {}
 
 last_ringing = False
+
 
 def hexdump(chars, sep, width):
     while chars:
@@ -211,7 +208,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
         text = text.encode("utf-8")
         self.socket.sendto(text, self.client_address)
         showtime()
-        logging.info("<<< %s" % data[0])
+        # logging.info("<<< %s" % data[0])
         logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
 
     def processRegister(self):
@@ -249,7 +246,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
         if rx_invalid.search(contact) or rx_invalid2.search(contact):
             if fromm in registrar:
                 del registrar[fromm]
-            self.sendResponse(response_codes_dict[488])
+            self.sendResponse(response_codes_dict["488"])
             return
         if len(contact_expires) > 0:
             expires = int(contact_expires)
@@ -259,18 +256,18 @@ class UDPHandler(socketserver.BaseRequestHandler):
         if expires == 0:
             if fromm in registrar:
                 del registrar[fromm]
-                self.sendResponse(response_codes_dict[200])
+                self.sendResponse(response_codes_dict["200"])
                 return
         else:
             now = int(time.time())
             validity = now + expires
 
-        logging.info("From: %s - Contact: %s" % (fromm, contact))
-        logging.debug("Client address: %s:%s" % self.client_address)
-        logging.debug("Expires= %d" % expires)
+        #logging.info("From: %s - Contact: %s" % (fromm, contact))
+        #logging.debug("Client address: %s:%s" % self.client_address)
+        #logging.debug("Expires= %d" % expires)
         registrar[fromm] = [contact, self.socket, self.client_address, validity]
         self.debugRegister()
-        self.sendResponse(response_codes_dict[200])
+        self.sendResponse(response_codes_dict["200"])
 
     def processInvite(self):
         logging.debug("-----------------")
@@ -278,11 +275,11 @@ class UDPHandler(socketserver.BaseRequestHandler):
         logging.debug("-----------------")
         origin = self.getOrigin()
         if len(origin) == 0 or origin not in registrar:
-            self.sendResponse(response_codes_dict[400])
+            self.sendResponse(response_codes_dict["400"])
             return
         destination = self.getDestination()
         if len(destination) > 0:
-            logging.info("destination %s" % destination)
+            #logging.info("destination %s" % destination)
             if destination in registrar and self.checkValidity(destination):
                 socket, claddr = self.getSocketInfo(destination)
                 # self.changeRequestUri()
@@ -294,13 +291,12 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 text = text.encode("utf-8")
                 socket.sendto(text, claddr)
                 showtime()
-                logging.info("<<< %s" % data[0])
-                print("SERVER ODOSLAL: <<< %s" % data[0])
+                #logging.info("<<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
             else:
-                self.sendResponse(response_codes_dict[480])
+                self.sendResponse(response_codes_dict["480"])
         else:
-            self.sendResponse(response_codes_dict[500])
+            self.sendResponse(response_codes_dict["500"])
 
     def processAck(self):
         logging.debug("--------------")
@@ -308,7 +304,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
         logging.debug("--------------")
         destination = self.getDestination()
         if len(destination) > 0:
-            logging.info("destination %s" % destination)
+            #logging.info("destination %s" % destination)
             if destination in registrar:  # registrar.has_key(destination):
                 socket, claddr = self.getSocketInfo(destination)
                 # self.changeRequestUri()
@@ -320,8 +316,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 text = text.encode("utf-8")
                 socket.sendto(text, claddr)
                 showtime()
-                logging.info("<<< %s" % data[0])
-                logging.info("ack sss")
+                #logging.info("<<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
 
     def processNonInvite(self):
@@ -330,11 +325,11 @@ class UDPHandler(socketserver.BaseRequestHandler):
         logging.debug("----------------------")
         origin = self.getOrigin()
         if len(origin) == 0 or origin not in registrar:
-            self.sendResponse(response_codes_dict[400])
+            self.sendResponse(response_codes_dict["400"])
             return
         destination = self.getDestination()
         if len(destination) > 0:
-            logging.info("destination %s" % destination)
+            #logging.info("destination %s" % destination)
             if destination in registrar and self.checkValidity(destination):
                 socket, claddr = self.getSocketInfo(destination)
                 # self.changeRequestUri()
@@ -346,14 +341,12 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 text = text.encode("utf-8")
                 socket.sendto(text, claddr)
                 showtime()
-                logging.info("<<< %s" % data[0])
-                logging.info("non invitte")
-                print("SERVER ODOSLAL: <<< %s" % data[0])
+                #logging.info("<<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
             else:
-                self.sendResponse(response_codes_dict[406])
+                self.sendResponse(response_codes_dict["406"])
         else:
-            self.sendResponse(response_codes_dict[500])
+            self.sendResponse(response_codes_dict["500"])
 
     def processCode(self):
         global last_ringing
@@ -365,18 +358,19 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 socket, claddr = self.getSocketInfo(origin)
                 self.data = self.removeRouteHeader()
                 data = self.removeTopVia()
+
+                # uprava akehokolvek sip stavoveho kodu ktory posle sip server
+                for key, value in response_codes_dict.items():
+                    if key in data[0]:
+                        data[0] = f"SIP/2.0 {value}"
+
                 text = "\r\n".join(data)
                 text = text.encode("utf-8")
                 socket.sendto(text, claddr)
                 showtime()
-                logging.info("<<< %s" % data[0])
-                logging.info("process code")
-                print("SERVER ODOSLAL: <<< %s" % data[0])
+                # logging.info("<<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
 
-                # zdvihol - 200
-                # odmietol - 603
-                # busy - 486
                 if "180" in data[0]:
                     # nedokazem len na zaklade 200 urcit ci bol hovor prijaty
                     # pretoze kod 200 je spracovavany aj vramci register
@@ -386,10 +380,10 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 else:
                     if "486" in data[0]:
                         logging.info("Hovor medzi %s a %s nebol prijaty - busy" % (self.getOrigin(), self.getDestination()))
-                        logging.info("Hovor medzi %s a %s bol ukonceny" % (self.getOrigin(), self.getDestination()))
+                        # logging.info("Hovor medzi %s a %s bol ukonceny" % (self.getOrigin(), self.getDestination()))
                     elif "603" in data[0]:
                         logging.info("Hovor medzi %s a %s bol odmietnuty" % (self.getOrigin(), self.getDestination()))
-                        logging.info("Hovor medzi %s a %s bol ukonceny" % (self.getOrigin(), self.getDestination()))
+                        # logging.info("Hovor medzi %s a %s bol ukonceny" % (self.getOrigin(), self.getDestination()))
                     elif last_ringing and ("200" in data[0]):
                         logging.info("Hovor medzi %s a %s bol prijaty" % (self.getOrigin(), self.getDestination()))
 
@@ -425,11 +419,11 @@ class UDPHandler(socketserver.BaseRequestHandler):
             elif rx_update.search(request_uri):
                 self.processNonInvite()
             elif rx_subscribe.search(request_uri):
-                self.sendResponse(response_codes_dict[200])
+                self.sendResponse(response_codes_dict["200"])
             elif rx_publish.search(request_uri):
-                self.sendResponse(response_codes_dict[200])
+                self.sendResponse(response_codes_dict["200"])
             elif rx_notify.search(request_uri):
-                self.sendResponse(response_codes_dict[200])
+                self.sendResponse(response_codes_dict["200"])
             elif rx_code.search(request_uri):
                 self.processCode()
             else:
@@ -445,8 +439,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
             request_uri = self.data[0]
             if rx_request_uri.search(request_uri) or rx_code.search(request_uri):
                 showtime()
-                logging.info(">>> %s" % request_uri)
-                print("SERVER PRIJAL: >>> %s" % data[0])
+                # logging.info(">>> %s" % request_uri)
                 logging.debug("---\n>> server received [%d]:\n%s\n---" % (len(data), data))
                 logging.debug("Received from %s:%d" % self.client_address)
                 self.processRequest()
@@ -457,5 +450,4 @@ class UDPHandler(socketserver.BaseRequestHandler):
                     hexdump(data, ' ', 16)
                     logging.warning("---")
         except UnicodeDecodeError:
-            print("hm")
             pass

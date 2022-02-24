@@ -1,0 +1,26 @@
+21:39:51: Thu, 24 Feb 2022 21:39:51 
+21:40:01: mobil@147.175.191.134 vola pocitac@147.175.191.134
+21:40:09: mobil@147.175.191.134 vola pocitac@147.175.191.134
+21:40:11: Hovor medzi mobil@147.175.191.134 a pocitac@147.175.191.134 bol prijaty
+21:40:14: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol ukonceny
+21:40:17: mobil@147.175.191.134 vola pocitac@147.175.191.134
+21:40:19: Hovor medzi mobil@147.175.191.134 a pocitac@147.175.191.134 bol odmietnuty
+21:47:20: Thu, 24 Feb 2022 21:47:20 
+21:47:38: mobil@147.175.191.134 vola pocitac@147.175.191.134
+21:48:09: Hovor medzi mobil@147.175.191.134 a pocitac@147.175.191.134 nebol prijaty - busy
+21:49:59: pocitac@147.175.191.134 vola mobil@147.175.191.134
+21:50:44: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 nebol prijaty - busy
+21:51:01: pocitac@147.175.191.134 vola mobil@147.175.191.134
+21:51:47: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 nebol prijaty - busy
+21:52:31: pocitac@147.175.191.134 vola mobil@147.175.191.134
+21:52:33: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol prijaty
+21:52:35: mobil@147.175.191.134 vola pocitac@147.175.191.134
+21:53:06: Hovor medzi mobil@147.175.191.134 a pocitac@147.175.191.134 nebol prijaty - busy
+21:58:22: Thu, 24 Feb 2022 21:58:22 
+21:58:25: mobil@147.175.191.134 vola pocitac@147.175.191.134
+21:58:27: mobil@147.175.191.134 vola pocitac@147.175.191.134
+21:58:27: mobil@147.175.191.134 vola pocitac@147.175.191.134
+21:58:33: mobil@147.175.191.134 vola pocitac@147.175.191.134
+21:58:37: Hovor medzi mobil@147.175.191.134 a pocitac@147.175.191.134 bol prijaty
+21:58:42: Hovor medzi pocitac@147.175.191.134 a mobil@147.175.191.134 bol ukonceny
+21:59:16: Thu, 24 Feb 2022 21:59:16 

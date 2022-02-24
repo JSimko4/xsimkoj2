@@ -5,14 +5,17 @@ import sipfullproxy
 
 HOST, PORT = "147.175.191.134", 5060
 response_codes_dict = {
-    200: "200 OK",
+    "100": "100 Skusam",
+    "180": "180 Zvonim",
+    "200": "200 OK VYBAVENE",
 
-    400: "400 Bad Request",
-    406: "406 Not Acceptable",
-    480: "480 Temporarily Unavailable",
-    488: "488 Not Acceptable Here",
+    "400": "400 Bad Request",
+    "406": "406 Not Acceptable",
+    "480": "480 Temporarily Unavailable",
+    "486": "486 Obsadene",
+    "488": "488 Not Acceptable Here",
 
-    500: "500 Server Internal Error",
+    "500": "500 Server Internal Error",
 }
 
 
